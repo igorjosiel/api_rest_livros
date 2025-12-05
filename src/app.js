@@ -31,7 +31,15 @@ app.get("/livros/:id", (req, res) => {
 
 app.post("/livros", (req, res) => {
   books.push(req.body);
+
   res.status(201).send("Livro adicionado com sucesso!");
+});
+
+app.put("/livros/:id", (req, res) => {
+  const index = searchBook(req.params.id);
+  books[index].titulo = req.body.titulo;
+
+  res.status(200).json(books);
 });
 
 export default app;
