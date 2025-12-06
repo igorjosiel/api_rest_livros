@@ -1,0 +1,12 @@
+import express from "express";
+import AuthorController from "../controllers/authorController.js";
+
+const router = express.Router();
+
+router.get("/autores", AuthorController.getAuthors);
+router.get("/autores/:id", AuthorController.getAuthorById);
+router.post("/autores", AuthorController.createAuthor);
+router.put("/autores/:id", AuthorController.updateAuthor);
+router.delete("/autores/:id", AuthorController.deleteAuthor);
+
+export default router;
