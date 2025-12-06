@@ -32,7 +32,7 @@ class BookController {
 
     try {
       const foundAuthor = await Author.findById(newBook.author);
-      const fullBook = { ...newBook, author: { ...foundAuthor._doc }};
+      const fullBook = { ...newBook, author: { ...foundAuthor._doc } };
       const createdBook = await Book.create(fullBook);
 
       res
@@ -68,6 +68,20 @@ class BookController {
       res
         .status(500)
         .json({ message: `${error.message} - falha na remoção do livro.` });
+    }
+  }
+
+  static async getBooksByPublisher(req, res) {
+    const publisher = req.query.publisher;
+
+    try {
+      const booksByPublisher = await Book.find({ publisher });
+
+      res.status(200).json(booksByPublisher);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: `${error.message} - falha na requisição.` });
     }
   }
 }
